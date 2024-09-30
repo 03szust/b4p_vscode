@@ -1,0 +1,25 @@
+{
+  "name": "b4p",
+  "displayName": "B4P",
+  "description": "b4p syntax support for vscode",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "b4p",
+      "aliases": ["b4p", "b4p"],
+      "extensions": ["b4p"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "b4p",
+      "scopeName": "source.b4p",
+      "path": "./syntaxes/b4p.tmLanguage.json"
+    }]
+  }
+}

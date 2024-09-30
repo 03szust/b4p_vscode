@@ -1,0 +1,288 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"comment": [
+		"this grammar was created by Stefan zur Bonsen.",
+		"It might not be perfect or following best practices but it works",
+		"if there are any issues please contact Georg zur Bonsen",
+		"or consult the B4P Documentation at https://www.b4p.app/index.html"
+	],
+	"name": "b4p",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#sysvar"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#semicolon"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "constant.character.tab.b4p",
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(tab)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))"
+				},
+				{
+				"name": "constant.character.newline.b4p",
+				"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(new line)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))"
+				},
+				{
+				"name": "constant.character.escape.b4p",
+				"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(escape)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))"
+				},
+				{
+				"name": "constant.language.false.b4p",
+				"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(false)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))"
+				},
+				{
+					"name": "constant.language.false.b4p",
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(true)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))"
+				},
+				{
+				"name": "keyword.control.else.b4p",
+				"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(else)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.multiline.b4p",
+					"begin": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*\"\"\"",
+					"end": "\"\"\""
+				},
+				{
+					"name": "string.quoted.single.b4p",
+					"begin": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*'''",
+					"end": "'''"
+				},
+				{
+					"name": "string.quoted.double.b4p",
+					"begin": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*\"",
+					"end": "(\"|$)"
+				},
+				{
+					"name": "string.quoted.single.b4p",
+					"begin": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*'",
+					"end": "('|$)"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.block.b4p",
+					"begin": "(\\/\\*)",
+					"end": "(\\*\\/)"
+				},
+				{
+					"name": "comment.line.double-slash.b4p",
+					"begin": "(\\/\\/)",
+					"end": "$"
+				},
+				{
+					"name": "comment.line.double-dollar.b4p",
+					"begin": "(\\$\\$)",
+					"end": "$"
+				}
+			]
+		},
+		"sysvar": {
+      		"patterns": [
+				{
+        			"name": "storage.system.variable.b4p",
+        			"match": "\\b(command line arguments|local settings|libraries|runtime settings|system info|time stamp)\\b"
+        		}
+			]
+    	},
+		"operators": {
+      		"patterns": [
+				{
+					"name": "keyword.operator.reference.b4p",
+					"match": "\\^"
+				},
+				{
+					"name": "keyword.operator.arithmetic.b4p",
+					"match": "(\\+|\\-|\\/|\\*)"
+				},
+				{
+					"name": "keyword.operator.comparison.b4p",
+					"match": "(\\=|\\<\\>|\\=\\=|\\!\\=|\\<\\=|\\>\\=|\\<|\\>)"
+				},
+				{
+					"name": "keyword.operator.logical.b4p",
+					"match": "(\\!|\\&|\\|)"
+				},
+				{
+					"name": "keyword.operator.placeholder.b4p",
+					"match": "(\\~|\\?|\\#)"
+				}
+			]
+    	},
+		"numbers": {
+      		"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*((?:\\d)*([.'\"]|(?: )*)?)*((?:\\d)+)(?: )*(?=$|[+\\-*/&|!<>=~:|)|\\]},;^]|(?:\\.\\.))",
+			"name": "constant.numeric.b4p"
+    	},
+		"semicolon": {
+      		"patterns": [
+        		{
+          			"name": "punctuation.semicolon.b4p",
+          			"match": "\\;$"
+        		}
+      		]
+    	},
+		"functions":{
+			"patterns": [
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(if|unless|once|check|switch|case|break(?: case| loop)?|continue(?: case| loop| with next case)?|repeat|do|for(?: all (?:parameters|variables(?: if existing(?: and valid)?)?|characters))?|define (?:additional )?(?:function|procedure(?: and function)?)|return|(?:user )?function existing|delete user function|start|include|get long options|pause|stop|interactive|exit|end|abort|throw|catch(?: if)?|exception|null|pick(?: if(?:s| existing(?: and valid)?)?| by value)?|select(?: if(?:s| existing(?: and valid)?)?| by value)?|compare(?: pick| select)?|call|deep(?:r)?|exec|calc|(?:table )?assign)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "keyword.control.functions.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(echo|print(?: line| bar)?|format(?: print)?|compose(?: line)?|input(?: to complete)?| quick(?: ignore case)?|getch(?: ignore case)?|clipboard|cls|clear|cursor|(?:background|text) color|(?:reset )?console|blinking|boldface|reverse|underscore|prompt|see|inspect|list (?:global|local|system)? variables)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.io.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(soft|str|vsoft|vstr|(?:clean (?:if )?|smart (?:if )?)?num|date(?: time)?|pure (?:date|time)|time|bool|parameter set|best type|join(?:(?: unique)? ignore blanks)?|(?:v)?(?:sub)?type|hash signature|excel (?:column|coordinates|validate sheet name))(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.type.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(is (?:strictly )?(?:integer|numeric)(?: or blank)?|even|odd|whole|zebra|abs|round(?: down| up)?|mod|random|hex to decimal|distribute amount|cbrt|sqrt|pow|10p|exp|ln|log|(?:a)?(?:cos|sin|tan)(?: deg|h)?|add|and|div|mul|or|sub|xor|xnor|(?:v)?(?:max|min)(?: ignore (?:blanks|zero)| (?:(?:abc|string)(?: ignore (?:case|blanks|both))?)| (?:123|numeral)(?: ignore zero)?)?(?: if(?: any)?)?|limit|count(?: ignore (?:blanks|both|zero)?)?(?: if(?: any)?)?|mdiv|mmul|minv|mdet|linear|horizontal|vertical|flat|diagonal|transpose|flip (?:horizontally|vertically)|rotate (?:left|right)|(?:compose|echo|print) matrix|(?:average|deviation|geometric mean|product|rms|variance)(?: ignore (?:blanks|zero))?(?: if(?: any)?)?|(?:median|quantile)(?: ignore zero)?(?: if(?: any)?)?|harmonic mean(?: if(?: any)?)?|(?:parallel|sum)(?: if(?: any)?)?|correlation|covariance|gini(?: ignore (?:blanks|zero))?|regression|(?:linear|nearest (?:right )neighbor|polynomial|spline) interpolation|histogram|(?:include|exclude) (?:if(?: any)?)|join (?:unique )?(?:ignore blanks )?(?:if(?: any)?)|cagr|irr|tv|discount|distribute(?: advance)?)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.math.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(find(?: ignore (?:blanks|both|case))?|(?:replace|substitute)(?: all)?|(?:v)?length|width|height|text row|(?:v)?(?:left|right)(?: last match)?(?: include)?|(?:v)?middle(?: until)?(?: include)?|(?:v)?outside(?: until)?(?: exclude)?|(?:v)trim(?: all)?|clean|tokenize|(?:get|locate) differences|chr|code|(?:de|en)code entities|characters|(?:align|pad)(?: right)?|random (?:letter|string)|describe|abbreviate name)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.string.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*((?:date|time) inside|day|month|year|day of year|weekday|week|fq|fy|reschedule|hour|minute|second|watch (?:continue|read|reset|start|stop)|(?:sleep|wait)(?: until)?(?: countdown)?)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.type.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(count elements(?: ignore (blanks|both|case))?|subset(?: recursive)?(?: ignore (?:blanks|both|case))?|filter(?: 1| stop(?: include)?| start(?: n)?(?: include)?| n)?)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.set.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(table (?:load(?: unchanged| excel file)?|save(?: multiple| with (?:decimal comma|local decimal seperator)| excel file)?|list sheets|list|menu(?: quick)?|create(?: if not existing)?|initialize|configure|append(?: on same (?:row|field)| blank rows)?|(?:add(?: missing)?|write(?: or add missing)?) row|write column selected rows|read (?:row|column selected row)?|clear|delete(?: silently)?|existing|length|(?:row|max|min) width|search(?: vertically| row)?|find row|(?:all)? selected rows|selected (?:column(?:s| numbers)|headers)|search header row|explore|filter(?: ignore case)?|extract|check header(?:s(?: silently)?)?|column number|rename (?:column |existing )?headers|correct headers(?: ignore case)?|lift (?:contents|header(?:s| row))|insert (?:missing )?columns|copy columns(?: selected rows)?|duplicate columns|sort columns|rearrange (?:existing )? columns|keep (?:existing )columns|delete (?:remaining |(?:all )?(?:blank |empty |unnamed ))?columns|insert (?:rows(?: if needed)?|(?:above )?selected rows)|delete (?:remaining )?rows(?: if needed)?|(?:delete|keep) selected rows|delete blank rows|check row|move (?:selected )?rows|rearrange selected rows|(?:sort|rank) (?:selected )?rows|(?:write|read|find|replace) cells(?: selected (?:rows|columns|rows and columns))?|process(?: all rows| all selected rows|rows|selected rows(?: fast)?| (?:selected )?columns|all cells|cells(?: in columns)?(?:selected rows)?)|manipulat(?: selected rows)?|(?:fill|substitute) (?:vertically|horizontally)(?:selected rows)?|insert cells selected (?:rows|columns)|flip (?:horizontally|vertically)|rotate (?:right|left)|format numbers|clean|fit|flip (?:selected )? rows|transpose|serialize(?: all| ignore zero)?|spread(?: given header)?(?: accumulating)?|consolidate(?: selected rows)?|distribute(?: advance)?(?: accumulate)?|rename|copy table(?: selected rows| columns(?: selected rows)?)?|split table (?:selected rows|columns)|compare(?: ignore (?:blanks|both|case)?)|validate|check duplicates(?: ignore (?:blanks|both|case)(?: selected rows)?)?|(?:lookup|integrate)(?: top down| once| fast| smart(?: once)?| with rules(?: once)?)?(?: ignore case)?|expand(?: fast)?(?: smart| with rules)?(?: ignore case)?|digest(?: ignore case| smart(?: ignore case)?| with rules(?: ignore case)?(?: once)?)?|describe(?: selected rows)?(?: ignore case)?|merge(?: (?:exclusive|extend|intersect|substract) columns)?|overlay(?: (?:exclusive|extend|intersect) columns)?|intersect(?: (?:exclusive|extend|intersect) columns)?|subtract(?: (?:exclusive|extend|subtract) columns)?|exclude(?: (?:exclusive|extend|exclusive) columns)?|(?:multiply|divide)(?: selected rows)?|arrange(?: with spacing)?|sytle (?:table|rows|columns|cells|auto width|theme|reset))|forget memorized table columns|row|col|list tables|excel list sheets|with table|for all (?:current )?(?:table (?:selected )?columns)|(?:darken|lighten|weaken)? color(?:s)?|rgb|add color|translate style attributes for (?:excel(?: xml 2003)?|html)?)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.table.b4p",
+							"patterns": [
+								{
+									"match": "table",
+									"name": "support.type.b4p"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(existing(?: here)?(?: and valid)?|copy|identify|scope|name|exchange|protect(?: recursive)?|delete(?: members)?|insert members|global|local|regional|(?:re)?dim(?: protect)?|(?:array|structure)(?: protect)?|member count|weight(?: profile)?|depth|structure to array(?: recursive)?|array to array structure|array to structure|set(?: names)?|variable(?: load| to variable| save| to json)|json to variable|attribute(?: (?:delete|listing|modify|read|remove|write))?)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.var.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*((?:directory|file) existing|(?:read|write) access(?: repeat if locked)|(?:working|starting) directory|pwd|cd|chdir|(?:directory|file) size|disk space(?: free)?|(?:advanced )directory listing(?: recursive)|file browser|dir|(?:search|count) files(?: recursive)?|choose recent file|resolve (?:directory|file|path) name|office document properties|directory create(?: all| silently| temp)|md|mkdir|(?:file|directory) delete(?: (?:all|silently|multiple(?: all)?|recusive(?: all))?)?|directory delete recursive if empty|rd|rmdir|(?:file|directory) rename(?: all|silently)?|file copy(?: multiple| recursive)?(?: overwrite)?(?: all)?|file create link(?: all| silently)?|file download(?: overwrite)?(?: all| silently)?|zip (?:compress|extract (?:files|all))?)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.directory.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(open|system|quote path|set locale|(?:global|script) privileges|license (?:provide identification|apply key))(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.system.b4p"
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))(?: )*(help(?: (?:functions|index|keywords|language|library|user guide|welcome))?|docs|openweb|browser|(?:table |variable )?view|view reset|(?:explain|list|dump) functions|dump entities)(?=(?: |\\t)*\\(.*\\))",
+					"captures": {
+						"1": {
+							"name": "support.function.help.b4p",
+							"patterns": [
+								{
+									"match": "table",
+									"name": "support.type.b4p"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))((?:(?:\\w|\\t|\"|\\'| )+(?:\\.)?(?:\\w|\\t|\"|\\'| )*)*)(?=(?: |\\t)*\\(.*\\))",
+					"name": "meta.function.b4p",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.b4p",
+							"patterns": [
+								{
+									"match": "table",
+									"name": "support.type.b4p"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"variables": {
+			"match": "(?<=^|[+\\-*/&|!<>=~:|()|\\[\\]{},;^]|(?:\\.\\.))((?:(?:\\w|\\t|\"|\\'| )+(?:\\.)?(?:\\w|\\t|\"|\\'| )*)*)(?=(?: |\\t)*\\[.*\\])",
+			"name": "entity.name.variable.b4p"
+		}
+	},
+	"scopeName": "source.b4p"
+}
